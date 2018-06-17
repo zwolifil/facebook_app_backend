@@ -3,7 +3,7 @@ const multer = require('multer');
 module.exports = function(app) {
     const Storage = multer.diskStorage({
         destination: function(req, file, callback) {
-            callback(null, "../facebook-like-app/src/Images");
+            callback(null, "../facebook-like-app/public/Images");
         },
         filename: function(req, file, callback) {
             callback(null, file.originalname);
