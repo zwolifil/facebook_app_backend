@@ -1,6 +1,6 @@
 const admin = require("firebase-admin");
 
-const serviceAccount = require("../facebook-like-app-firebase-adminsdk-r0g7r-1206806e20.json");
+const serviceAccount = require("../facebook-like-app-firebase-adminsdk-r0g7r-44523f8228.json");
 
 const initializedUser = admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
