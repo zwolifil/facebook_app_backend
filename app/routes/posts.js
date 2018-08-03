@@ -15,4 +15,13 @@ module.exports = function(app) {
                 res.json(data);
             });
     });
+
+    app.put('/posts/:id', function (req, res) {
+        Post
+            .updateOne({_id: req.params["id"]}, {
+                $set: {author: req.body['name']}
+            }, function (err) {
+                if(err) throw err;
+            });
+    });
 };

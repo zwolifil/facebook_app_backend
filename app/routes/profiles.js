@@ -18,7 +18,7 @@ module.exports = function(app) {
 
     app.put('/profiles/:id', function (req, res) {
         Profile
-            .updateOne({_id: req.param("id")}, {
+            .updateOne({_id: req.params["id"]}, {
                 $set: {name: req.body['name'], avatar: req.body['avatar'], description: req.body['description']}
                 }, function (err) {
                 if(err) throw err;
