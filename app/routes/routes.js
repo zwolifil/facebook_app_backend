@@ -2,7 +2,8 @@ const routes = [
     require('./posts'),
     require('./images'),
     require('./token'),
-    require('./profiles')
+    require('./profiles'),
+    require('./comments')
 ];
 
 module.exports = function(app){
