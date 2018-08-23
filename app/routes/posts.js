@@ -24,4 +24,11 @@ module.exports = function(app) {
                 if(err) throw err;
             });
     });
+
+    app.get('/posts/:id', function (req, res) {
+        Post.find({content: {$regex : ".*#" + req.params["id"] + ".*"}}, function (err, posts) {
+            if(err) throw err;
+            res.send(posts);
+        });
+    });
 };

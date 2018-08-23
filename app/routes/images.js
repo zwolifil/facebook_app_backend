@@ -26,6 +26,7 @@ module.exports = function(app) {
                 return res.send(err.message);
             }
             const uid = [];
+            const postUid = uuidv1();
             const responseImages = [];
             await req.files.map((file, index) => {
                 uid[index] = uuidv1();
@@ -37,7 +38,7 @@ module.exports = function(app) {
                     }
                 });
             });
-            saveData(req, uid);
+            saveData(req, uid, postUid);
         });
     });
 
@@ -65,7 +66,7 @@ module.exports = function(app) {
 
 };
 
-function saveData(req, uid) {
+function saveData(req, uid, postUid) {
     const data = JSON.parse(req.body.body);
 
     //check what type of data
@@ -92,7 +93,6 @@ function saveData(req, uid) {
                 if (err) throw err;
             });
         if(req.body['nameChange'] === 'true') {
-            console.log(req.body);
             JSON.parse(req.body['postsToChange']).map(post => {
                 Post.updateOne({_id: post._id}, {
                     $set: post
@@ -101,5 +101,11 @@ function saveData(req, uid) {
                 })
             })
         }
+    } else if(req.body['dataType'] === 'ProfilePost') {
+        data.avatar = uid[0];
+        Profile(data)
+            .save(function (err, data) {
+                if(err) throw err;
+            })
     }
 }
